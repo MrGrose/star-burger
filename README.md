@@ -149,6 +149,36 @@ Parcel будет следить за файлами в каталоге `bundle
 - `ALLOWED_HOSTS` — [см. документацию Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts)
 - `YANDEX-API-KEY` - [см. инструкцию Yandex geocoder API](https://dvmn.org/encyclopedia/api-docs/yandex-geocoder-api/)
 - `ROLLBAR_TOKEN` - [Ваш токен Rollbar](https://app.rollbar.com/a/grachev.ro/p/star-burger/settings/access_tokens)
+- `DATABASE_URL` - [DATABASE_URL](https://github.com/jazzband/dj-database-url)
+
+
+Настройка базы данных PostgreSQL через Docker и DATABASE_URL
+
+1. Запуск контейнера PostgreSQL через Docker используйте команду:
+```bash
+    docker run -d \
+    --name ваше_имя_бд \
+    -e POSTGRES_USER=ваше_название \
+    -e POSTGRES_PASSWORD=ваш_пароль\
+    -e POSTGRES_DB=ваше_название \
+    -p 5432:5432 \
+    -v pgdata:/var/lib/postgresql/data \    # данные сохраняются в docker volume pgdata
+    --restart unless-stopped \              # --restart unless-stopped - автоматический запуск контейнера после перезагрузки сервера
+    postgres:14
+```
+
+2. Использование переменной окружения [DATABASE_URL](https://github.com/jazzband/dj-database-url)
+
+
+```python
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.getenv('DATABASE_URL'),
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
+```
 
 ## Цели проекта
 
