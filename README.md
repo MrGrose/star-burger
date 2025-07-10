@@ -136,68 +136,73 @@ Parcel будет следить за файлами в каталоге `bundle
 
 ## Как запустить prod-версию сайта
 
-Собрать фронтенд:
+1. Собрать фронтенд:
 
-```sh
-./node_modules/.bin/parcel build bundles-src/index.js --dist-dir bundles --public-url="./"
-```
-
-Настроить бэкенд: создать файл `.env` в каталоге `star_burger/` со следующими настройками:
-
-- `DEBUG` — дебаг-режим. Поставьте `False`.
-- `SECRET_KEY` — секретный ключ проекта. Он отвечает за шифрование на сайте. Например, им зашифрованы все пароли на вашем сайте.
-- `ALLOWED_HOSTS` — [см. документацию Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts)
-- `YANDEX-API-KEY` - [см. инструкцию Yandex geocoder API](https://dvmn.org/encyclopedia/api-docs/yandex-geocoder-api/)
-- `ROLLBAR_TOKEN` - [Ваш токен Rollbar](https://app.rollbar.com/a/grachev.ro/p/star-burger/settings/access_tokens)
-- `DATABASE_URL` - [DATABASE_URL](https://github.com/jazzband/dj-database-url)
+    ```sh
+    ./node_modules/.bin/parcel build bundles-src/index.js --dist-dir bundles --public-url="./"
+    ```
 
 
-Настройка базы данных PostgreSQL через Docker и DATABASE_URL
+2. Настроить бэкенд: создать файл `.env` в каталоге `star_burger/` со следующими настройками:
 
-1. Запуск контейнера PostgreSQL:
-```bash
-    docker run -d \
-    --name ваше_имя_бд \
-    -e POSTGRES_USER=ваше_название \
-    -e POSTGRES_PASSWORD=ваш_пароль\
-    -e POSTGRES_DB=ваше_название \
-    -p 5432:5432 \
-    -v pgdata:/var/lib/postgresql/data \    # данные сохраняются в docker volume pgdata
-    --restart unless-stopped \              # --restart unless-stopped - автоматический запуск контейнера после перезагрузки сервера
-    postgres:14
-```
-
-2. Использование переменной окружения [DATABASE_URL](https://github.com/jazzband/dj-database-url) в settings.py
+    - `DEBUG` — дебаг-режим. Поставьте `False`.
+    - `SECRET_KEY` — секретный ключ проекта. Он отвечает за шифрование на сайте. Например, им зашифрованы все пароли на вашем сайте.
+    - `ALLOWED_HOSTS` — [см. документацию Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts)
+    - `YANDEX-API-KEY` - [см. инструкцию Yandex geocoder API](https://dvmn.org/encyclopedia/api-docs/yandex-geocoder-api/)
+    - `ROLLBAR_TOKEN` - [Ваш токен Rollbar](https://app.rollbar.com/a/grachev.ro/p/star-burger/settings/access_tokens)
+    - `DATABASE_URL` - [DATABASE_URL](https://github.com/jazzband/dj-database-url)
 
 
-```python
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=os.getenv('DATABASE_URL'),
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
-```
+3. Настройка базы данных PostgreSQL через Docker
 
-### Деплой
+    Запуск контейнера PostgreSQL:
 
-Запустите скрипт:
+    ```bash
+        docker run -d \
+        --name ваше_имя_бд \
+        -e POSTGRES_USER=ваше_название \
+        -e POSTGRES_PASSWORD=ваш_пароль\
+        -e POSTGRES_DB=ваше_название \
+        -p 5432:5432 \
+        -v pgdata:/var/lib/postgresql/data \    # данные сохраняются в docker volume pgdata
+        --restart unless-stopped \              # --restart unless-stopped - автоматический запуск контейнера после перезагрузки сервера
+        postgres:14
+    ```
 
-```bash
-./deploy_star_burger.sh
-```
+    Использование переменной окружения [DATABASE_URL](https://github.com/jazzband/dj-database-url) в settings.py
 
-Что делает скрипт:
-- Обновляет код
-- Устанавливает зависимости
-- Собирает фронтенд
-- Собирает статику Django
-- Применяет миграции
-- Перезапускает сервисы systemd
-- Выводит сообщение об успешном завершении деплоя
-- Прекращает выполнение при любой ошибке (без продолжения)
 
+    ```python
+        DATABASES = {
+            'default': dj_database_url.config(
+                default=os.getenv('DATABASE_URL'),
+                conn_max_age=600,
+                conn_health_checks=True,
+            )
+        }
+    ```
+
+4. Деплой приложения
+
+    Запустите скрипт:
+
+    ```bash
+    ./deploy_star_burger.sh
+    ```
+
+    Что делает скрипт:
+    - Обновляет код
+    - Устанавливает зависимости
+    - Собирает фронтенд
+    - Собирает статику Django
+    - Применяет миграции
+    - Перезапускает сервисы systemd
+    - Выводит сообщение об успешном завершении деплоя
+    - Прекращает выполнение при любой ошибке (без продолжения)
+
+5. Адрес сайта
+
+    https://starburger768.ru/
 
 ## Цели проекта
 

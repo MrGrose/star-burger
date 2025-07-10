@@ -1,15 +1,16 @@
 from django import forms
-from django.shortcuts import redirect, render
-from django.views import View
-from django.urls import reverse_lazy
-from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import user_passes_test
 from django.db.models import F, Sum
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views import View
 
+from foodcartapp.models import Order, Product, Restaurant
 from locationapp.models import Location
-from foodcartapp.models import Product, Restaurant, Order
-from restaurateur.utils import fetch_order_and_restaurant_coordinates, get_distance
+from restaurateur.utils import (fetch_order_and_restaurant_coordinates,
+                                get_distance)
 
 
 class Login(forms.Form):
@@ -99,6 +100,7 @@ def view_orders(request):
         .prefetch_related('items__product')
         .annotate(price=Sum(F('items__quantity') * F('items__product__price')))
         .filter(status__in=['pending', 'in_progress', 'delivery'])
+        .order_by('-id')
     )
     restaurants = Restaurant.objects.prefetch_related('menu_items__product')
     restaurant_products = {
