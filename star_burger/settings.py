@@ -18,7 +18,7 @@ DEBUG = env.bool('DEBUG', True)
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', ['127.0.0.1', 'localhost'])
 
 ROLLBAR = {
-    'access_token': env('ROLLBAR_TOKEN'),
+    'access_token': env('ROLLBAR_TOKEN', ''),
     'environment': env.str('ENVIRONMENT', 'development'),
     'branch': 'master',
     'root': BASE_DIR,
