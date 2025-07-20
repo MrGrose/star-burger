@@ -15,11 +15,3 @@ env/
 Dockerfile
 docker-compose.yml
 .git
-
-# frontend/
-# !frontend/Dockerfile
-# !frontend/**
-
-# backend/
-# !backend/Dockerfile
-# !backend/**
