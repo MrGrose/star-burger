@@ -16,6 +16,9 @@ Dockerfile
 docker-compose.yml
 .git
 
+Dockerfile/prod/
+docker-compose-prod.yaml
+
 frontend/
 !frontend/Dockerfile
 !frontend/**
