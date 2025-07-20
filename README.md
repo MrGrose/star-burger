@@ -209,7 +209,7 @@ Parcel будет следить за файлами в каталоге `bundle
 
 Запуск сервисов:
 ```bash
-docker-compose up -d
+docker compose -f docker-compose-dev.yaml up
 ```
 Эта команда:
 - Запустит контейнер с базой данных (PostgreSQL).
@@ -225,18 +225,18 @@ docker-compose up -d
 
 Остановка всех контейнеров:
 ```bash
-docker-compose down
+docker compose -f docker-compose-dev.yaml down
 ```
 
 Просмотр логов сервисов:
 ```bash
-docker-compose logs <имя контейнера>
+docker compose -f docker-compose-dev.yaml logs <имя контейнера>
 ```
 
 Пересборка образов (например, после изменений в коде):
 ```bash
-docker-compose build
-docker-compose up -d
+docker compose -f docker-compose-dev.yaml build
+docker compose -f docker-compose-dev.yaml up -d
 ```
 
 ## Цели проекта

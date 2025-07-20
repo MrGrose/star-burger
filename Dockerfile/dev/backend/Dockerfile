@@ -17,8 +17,7 @@ WORKDIR /app
 COPY --from=build /app/builder /builder
 COPY --from=build /app ./
 
-RUN chmod +x ./commands.sh && \
-    pip install --no-cache /builder/* && \
+RUN pip install --no-cache /builder/* && \
     rm -rf /builder
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

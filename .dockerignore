@@ -12,15 +12,14 @@ env/
 .DS_Store
 .env
 .env.*
+Dockerfile
+docker-compose.yml
+.git
 
-
+frontend/
+!frontend/Dockerfile
+!frontend/**
 
 backend/
-frontend/
-assets/
-bundles-src/
-bundles/
-node_modules/
-.parcel-cache/
-package-lock.json
-package.json
+!backend/Dockerfile
+!backend/**
