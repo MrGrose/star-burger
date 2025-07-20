@@ -29,7 +29,7 @@ services:
       POSTGRES_HOST: database
     volumes:
       - /var/www/media:/app/media
-      - /var/www/staticfiles:/app/staticfiles
+      - /var/www/frontend:/app/staticfiles
     working_dir: /app
     env_file:
       - ./backend/star_burger/.env
