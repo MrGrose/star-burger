@@ -3,11 +3,8 @@ set -e
 set -o pipefail
 echo "Начинаем деплой."
 git pull origin master
-echo "Создаем папки для media и frontend"
-sudo mkdir -p /var/www/media /var/www/frontend
-sudo chmod -R 777 /var/www/media /var/www/frontend
 echo "Создание контенеров"
-docker compose -f docker-compose-prod.yaml down -v
+docker compose -f docker-compose-prod.yaml down
 docker compose -f docker-compose-prod.yaml up -d --build
 echo "Перезапускаем сервисы"
 systemctl reload nginx.service
