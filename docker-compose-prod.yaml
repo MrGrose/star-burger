@@ -28,8 +28,8 @@ services:
     environment:
       POSTGRES_HOST: database
     volumes:
-      - /var/www/media:/media
-      - /var/www/staticfiles:/staticfiles
+      - /var/www/media:/app/media
+      - /var/www/staticfiles:/app/staticfiles
     working_dir: /app
     env_file:
       - ./backend/star_burger/.env
@@ -63,7 +63,7 @@ services:
       dockerfile: Dockerfile.prod
     container_name: frontend
     volumes:
-      - /var/www/:/app/bundles
+      - /var/www/frontend:/app/bundles
     working_dir: /app
     networks:
       - starburger_net
