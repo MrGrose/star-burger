@@ -13,5 +13,7 @@ env/
 .env
 .env.*
 Dockerfile
-docker-compose.yml
+docker-compose.yaml
 .git
+Dockerfile.dev
+Dockerfile.prod

@@ -140,11 +140,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-
 .parcel-cache/
-
-fixture/
 staticfiles/
-# Dockerfile/prod/
-# docker-compose-prod.yaml
-# requirements-prod.txt
+media/
