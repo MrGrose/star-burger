@@ -34,7 +34,7 @@ services:
       - /root/opt/star-burger/staticfiles:/staticfiles
     working_dir: /app
     env_file:
-      - ./star_burger/.env
+      - ./backend/star_burger/.env
     ports:
       - "8080:8000"
     networks:
