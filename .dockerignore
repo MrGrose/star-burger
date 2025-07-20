@@ -16,10 +16,10 @@ Dockerfile
 docker-compose.yml
 .git
 
-frontend/
-!frontend/Dockerfile
-!frontend/**
+# frontend/
+# !frontend/Dockerfile
+# !frontend/**
 
-backend/
-!backend/Dockerfile
-!backend/**
+# backend/
+# !backend/Dockerfile
+# !backend/**

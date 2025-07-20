@@ -145,6 +145,6 @@ cython_debug/
 
 fixture/
 staticfiles/
-Dockerfile/prod/
-docker-compose-prod.yaml
-requirements-prod.txt
+# Dockerfile/prod/
+# docker-compose-prod.yaml
+# requirements-prod.txt
